@@ -36,13 +36,13 @@ class PlotPoints:
         #self.ax.plot(current_pose_list_x, current_pose_list_y, 'blue', label = 'real')
 
 
-        self.ax.plot(current_pose_list_y[:int(propotion/2)], current_pose_list_x[:int(propotion/2)] ,'deeppink')
-        self.ax.plot(current_pose_list_y[int(propotion/2):propotion], current_pose_list_x[int(propotion/2):propotion] ,'forestgreen', label = 'Part 1')
+        self.ax.plot(current_pose_list_y[:int(propotion/3)], current_pose_list_x[:int(propotion/3)] ,'darkorange')
+        self.ax.plot(current_pose_list_y[int(propotion/3):int(propotion)], current_pose_list_x[int(propotion/3):int(propotion)] ,'forestgreen', label = 'Part 1')
 
-        self.ax.plot(current_pose_list_y[propotion:2*propotion +1], current_pose_list_x[propotion:2*propotion +1] ,'deeppink', label = 'Part 2')
+        self.ax.plot(current_pose_list_y[propotion:2*propotion +1 - 70], current_pose_list_x[propotion:2*propotion +1 - 70] ,'darkorange', label = 'Part 2')
 
-        self.ax.plot(current_pose_list_y[2*propotion +1:2*propotion +1 +int(propotion/2)], current_pose_list_x[2*propotion +1:2*propotion +1 +int(propotion/2)] ,'deepskyblue', label = 'Part 3')
-        self.ax.plot(current_pose_list_y[2*propotion +1 +int(propotion/2):], current_pose_list_x[2*propotion +1 +int(propotion/2):] ,'deeppink')
+        self.ax.plot(current_pose_list_y[2*propotion +1 -70 :int(2*propotion) +1 +int(propotion/2)], current_pose_list_x[2*propotion +1 - 70:int(2*propotion) +1 +int(propotion/2)] ,'deepskyblue', label = 'Part 3')
+        self.ax.plot(current_pose_list_y[2*propotion +1 +int(propotion/2):], current_pose_list_x[2*propotion +1 +int(propotion/2):] ,'darkorange')
 
         self.ax.plot(desired_pose_list_y, desired_pose_list_x, 'black', label = 'Ground truth')
 
@@ -65,13 +65,14 @@ class PlotError:
             self.time.append(i*self.time_discret) 
             self.med_error.append(erro_med) 
 
-        self.ax.plot(self.time[:int(propotion/2)], erro[:int(propotion/2)], 'deeppink')
-        self.ax.plot(self.time[int(propotion/2):propotion], erro[int(propotion/2):propotion], 'forestgreen', label = 'Error part 1')
 
-        self.ax.plot(self.time[propotion:2*propotion +1], erro[propotion:2*propotion +1], 'deeppink', label = 'Error part 2')
+        self.ax.plot(self.time[:int(propotion/3) + 1], erro[:int(propotion/3) + 1], 'darkorange')
+        self.ax.plot(self.time[int(propotion/3):propotion], erro[int(propotion/3):propotion], 'forestgreen', label = 'Error part 1')
 
-        self.ax.plot(self.time[2*propotion +1:2*propotion +1 +int(propotion/2)], erro[2*propotion +1:2*propotion +1 +int(propotion/2)], 'deepskyblue', label = 'Error part 3')
-        self.ax.plot(self.time[2*propotion +1 +int(propotion/2):], erro[2*propotion +1 +int(propotion/2):], 'deeppink')
+        self.ax.plot(self.time[propotion:2*propotion +1 -70 ], erro[propotion:2*propotion +1 -70], 'darkorange', label = 'Error part 2')
+
+        self.ax.plot(self.time[2*propotion +1 -70:2*propotion +1 +int(propotion/2)], erro[2*propotion +1 -70:2*propotion +1 +int(propotion/2)], 'deepskyblue', label = 'Error part 3')
+        self.ax.plot(self.time[2*propotion +1 +int(propotion/2):], erro[2*propotion +1 +int(propotion/2):], 'darkorange')
 
         self.ax.plot(self.time, self.med_error, 'black', label = 'Mean Error')
 
@@ -102,7 +103,7 @@ for i in range(0, len(current_pose_list_string)):
             desired_pose_list_y.append(1000*desired_pose_list_number[i][0])
 
 length = len(current_pose_list_x)
-propotion = int(length/3)
+propotion = int(length/3 +20)
 
 erro_x = np.array(desired_pose_list_x) - np.array(current_pose_list_x)
 erro_y = np.array(desired_pose_list_y) - np.array(current_pose_list_y)
